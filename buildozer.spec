@@ -19,7 +19,7 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 
 # (list) Application requirements
-requirements = python3, kivy
+requirements = python3, kivy, pyjnius==1.6.1
 
 # (str) Supported orientations (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
@@ -34,10 +34,10 @@ fullscreen = 1
 # (bool) Accept SDK license without prompting
 android.accept_sdk_license = True
 
-# (str) Android NDK version to use (إصدار مستقر متوافق مع الأداة)
+# (str) Android NDK version to use
 android.ndk = 25b
 
-# (int) Android API to target (تعديل الإصدار لـ 31 لضمان التوافق التام مع Gradle)
+# (int) Android API to target
 android.api = 31
 
 # (int) Minimum API your APK will support
