@@ -9,6 +9,9 @@ package.name = kerosecurity
 # (str) Package domain (needed for android packaging)
 package.domain = org.test
 
+# (str) Version of the application (السطر الإجباري اللي حل المشكلة)
+version = 0.1
+
 # (str) Source code where the main.py lives
 source.dir = .
 
@@ -43,7 +46,7 @@ android.minapi = 21
 # (bool) Use --private data storage (True) or --dir public storage (False)
 android.private_storage = True
 
-# (list) Android architectures to build for (تم تقليلها للسرعة)
+# (list) Android architectures to build for (معمارية واحدة للسرعة)
 android.archs = arm64-v8a
 
 # (list) Pattern to exclude from the APK (حذف ملفات التست لتقليل الحجم)
