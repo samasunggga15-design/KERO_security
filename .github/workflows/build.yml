@@ -25,11 +25,10 @@ jobs:
         pip install --upgrade pip
         pip install "cython<3.0.0" virtualenv buildozer
 
-    - name: Clean and Build with Buildozer
+    - name: Build with Buildozer
       run: |
         export PIP_BREAK_SYSTEM_PACKAGES=1
-        # تنظيف الكاش القديم لبدء بناء جديد ونظيف
-        buildozer android clean
+        # شيلنا أمر الـ clean الخشن وبدأنا البناء الآمن علطول
         yes | buildozer android debug
         
     - name: Upload APK Artifact
