@@ -16,20 +16,7 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 
 # (list) Application requirements
-# CAUTION: Removed "android" from requirements to prevent pip build failure
 requirements = python3, kivy
-
-# (str) Custom source folders for requirements
-#requirements.source.kivy = ../kivy
-
-# (list) Garden requirements
-#garden_requirements =
-
-# (list) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
-
-# (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientations (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
@@ -56,8 +43,11 @@ android.minapi = 21
 # (bool) Use --private data storage (True) or --dir public storage (False)
 android.private_storage = True
 
-# (list) Android architectures to build for
-android.archs = armeabi-v7a, arm64-v8a
+# (list) Android architectures to build for (تم تقليلها للسرعة)
+android.archs = arm64-v8a
+
+# (list) Pattern to exclude from the APK (حذف ملفات التست لتقليل الحجم)
+android.exclude_patterns = license,lib/python3.*/test/*,lib/python3.*/site-packages/*/tests/*
 
 # (bool) automatically clean build cell on start
 buildozer.clean = True
