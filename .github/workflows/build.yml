@@ -1,63 +1,36 @@
-[app]
+name: Build APK
 
-# (str) Title of your application
-title = KERO Security
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
 
-# (str) Package name
-package.name = kerosecurity
+jobs:
+  build:
+    runs-on: ubuntu-22.04
 
-# (str) Package domain (needed for android packaging)
-package.domain = org.test
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-# (str) Source code where the main.py lives
-source.dir = .
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
 
-# (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+    - name: Install Android SDK Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libbz2-dev libreadline-dev libsqlite3-dev libssl-dev libgdbm-dev libffi-dev liblzma-dev tk-dev libspatialindex-dev
+        pip install --upgrade pip
+        pip install "cython<3.0.0" virtualenv buildozer
 
-# (list) Application requirements
-# CAUTION: Removed "android" from requirements to prevent pip build failure
-requirements = python3, kivy
-
-# (str) Custom source folders for requirements
-#requirements.source.kivy = ../kivy
-
-# (list) Garden requirements
-#garden_requirements =
-
-# (list) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
-
-# (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
-
-# (str) Supported orientations (one of landscape, sensorLandscape, portrait or all)
-orientation = portrait
-
-# (bool) Indicate if the application should be fullscreen or not
-fullscreen = 1
-
-# =============================================================================
-# Android specific
-# =============================================================================
-
-# (bool) Accept SDK license without prompting
-android.accept_sdk_license = True
-
-# (str) Android NDK version to use
-android.ndk = 25b
-
-# (int) Android API to target
-android.api = 33
-
-# (int) Minimum API your APK will support
-android.minapi = 21
-
-# (bool) Use --private data storage (True) or --dir public storage (False)
-android.private_storage = True
-
-# (list) Android architectures to build for
-android.archs = armeabi-v7a, arm64-v8a
-
-# (bool) automatically clean build cell on start
-buildozer.clean = True
+    - name: Build with Buildozer
+      run: |
+        yes | buildozer -v android debug
+        
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: package
+        path: bin/*.apk
