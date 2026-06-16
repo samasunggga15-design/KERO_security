@@ -9,7 +9,7 @@ package.name = kerosecurity
 # (str) Package domain (needed for android packaging)
 package.domain = org.test
 
-# (str) Version of the application (السطر الإجباري اللي حل المشكلة)
+# (str) Version of the application
 version = 0.1
 
 # (str) Source code where the main.py lives
@@ -34,11 +34,11 @@ fullscreen = 1
 # (bool) Accept SDK license without prompting
 android.accept_sdk_license = True
 
-# (str) Android NDK version to use
+# (str) Android NDK version to use (إصدار مستقر متوافق مع الأداة)
 android.ndk = 25b
 
-# (int) Android API to target
-android.api = 33
+# (int) Android API to target (تعديل الإصدار لـ 31 لضمان التوافق التام مع Gradle)
+android.api = 31
 
 # (int) Minimum API your APK will support
 android.minapi = 21
@@ -46,10 +46,10 @@ android.minapi = 21
 # (bool) Use --private data storage (True) or --dir public storage (False)
 android.private_storage = True
 
-# (list) Android architectures to build for (معمارية واحدة للسرعة)
+# (list) Android architectures to build for
 android.archs = arm64-v8a
 
-# (list) Pattern to exclude from the APK (حذف ملفات التست لتقليل الحجم)
+# (list) Pattern to exclude from the APK
 android.exclude_patterns = license,lib/python3.*/test/*,lib/python3.*/site-packages/*/tests/*
 
 # (bool) automatically clean build cell on start
